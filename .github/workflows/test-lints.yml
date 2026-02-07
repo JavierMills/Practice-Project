@@ -2,7 +2,7 @@
 name: React CI
 on: [push, pull_request]
 jobs:
-  test-lints:
+  run-aplication:
     runs-on: ubuntu-latest
     steps:
       - name: ----- Descargando el repositorio -----
@@ -14,12 +14,27 @@ jobs:
           cache: 'npm'
       - name: ---Instalando dependencia -----
         run: npm install
-      - name: ---Ejecutando calidad de pruebas -----
-        run: npm run lint
+  test-aplication:
+    runs-on: ubuntu-latest
+    needs: run-aplication
+    steps:
       - name: ---Iniciando prueba -----
         run: npm test
-      - name: ----Construyendo la aplicacion -----
+  build-aplication:
+    runs-on: ubuntu-latest
+    needs: test-aplication
+    steps:
+      - name: ---Iniciando build -----
         run: npm run build
-      - name: ---- Deployando la aplicacion -----
-        run: echo "Deploying the application..."
+  deploy-aplication:
+    runs-on: ubuntu-latest
+    needs: build-aplication
+    steps:
+      - name: ---Iniciando deploy -----
+        run: npm run deploy
+         
+
+
+
+    
 
