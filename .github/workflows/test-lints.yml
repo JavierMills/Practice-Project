@@ -1,0 +1,25 @@
+
+name: React CI
+on: [push, pull_request]
+jobs:
+  test-lints:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ----- Descargando el repositorio -----
+        uses: actions/checkout@v4
+      - name: ----- Descargando la version de nodeJS -----
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: ---Instalando dependencia -----
+        run: npm install
+      - name: ---Ejecutando calidad de pruebas -----
+        run: npm run lint
+      - name: ---Iniciando prueba -----
+        run: npm test
+      - name: ----Construyendo la aplicacion -----
+        run: npm run build
+      - name: ---- Deployando la aplicacion -----
+        run: echo "Deploying the application..."
+
