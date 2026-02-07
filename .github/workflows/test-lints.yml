@@ -18,18 +18,45 @@ jobs:
     runs-on: ubuntu-latest
     needs: run-aplication
     steps:
+      - name: ----- Descargando el repositorio -----
+        uses: actions/checkout@v4
+      - name: ----- Descargando la version de nodeJS -----
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: ---Instalando dependencia -----
+        run: npm install
       - name: ---Iniciando prueba -----
         run: npm test
   build-aplication:
     runs-on: ubuntu-latest
     needs: test-aplication
     steps:
+      - name: ----- Descargando el repositorio -----
+        uses: actions/checkout@v4
+      - name: ----- Descargando la version de nodeJS -----
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: ---Instalando dependencia -----
+        run: npm install
       - name: ---Iniciando build -----
         run: npm run build
   deploy-aplication:
     runs-on: ubuntu-latest
     needs: build-aplication
     steps:
+      - name: ----- Descargando el repositorio -----
+        uses: actions/checkout@v4
+      - name: ----- Descargando la version de nodeJS -----
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: ---Instalando dependencia -----
+        run: npm install
       - name: ---Iniciando deploy -----
         run: npm run deploy
          
